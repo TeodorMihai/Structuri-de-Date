@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1425776297 source:/home/teo/Politehnica/AN sem 2/SDA/learn.c
+	<stdio.h>
+	<stdlib.h>
+

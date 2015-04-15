@@ -1,0 +1,67 @@
+AM cateva fisiere, voi explica ce contine fiecare pe scurt, am scris mai multee detalii in comentarii
+
+progr.c: 
+
+Functa execute_command: executa o comnda, adica da damage pe casuta curenta, ii atribuie o adresa daca e write
+si afiseaza datele daca e read sau damage
+
+Functia calculate use: aduna damage-ul din cele 4 sferturi(din fiecare casuta) si il imparte la n de casute
+
+Functia rez_coada: rezolva cazul cu coada in umratorul fel. In variabila next_read voi retine timpul pana la care voi
+citi urmatoarea comanda, cand acesta e 0 o citesc(pot citi mai multe comenzi deodata daca e vorba de comenzile bonus)
+Dupa ce citesc o comanda ii atribui lui next_read valoarea noului timp de asteptare.
+La fiecare moment de timp incerc sa execut o comanda daca ma aflu la linia si indicele potrivit si am comanda de executat,
+daca nu ma mut cu o casuta mai aprope de locul unde trebuie executat comanda cu prioritatea cea mai mare. Daca nu ma aflu 
+la casuta buna ma mut o casuta spre ea(move_toward). Indiferent daca execut sau nu comanda, ma mut o casuta aplic damage 
+si scad cu o unitate timpul pana la care voi citi urmatoarea comanda.
+
+Functia rez_stia: Fac aceleasi lucru in mare ca la rez_coada doar ca in caz de bonus bag instructiunile invers si se schimba 
+pioritatea operatiilor dupa regulile stive.
+
+Functia main: aici doar citesc cazul si nr de linii al hard-ului. Apelez rez_coada sau raze_stiva dupa cerinta inputului.
+
+
+lista_hard.c:
+
+
+Functia create_list:  creeaza hard-ul in urmatorul fel. Fiecare casuta din hard va fi retinuta printr-o strctura care poate avea 3 legaturi:
+
+up: va pointa catre linia urmatoare daca este cazul(acest atribut va avea valoare doar pentru cazul cand indexul este 0)
+down: la fel ca down, doar ca face o legatura cu linia anterioara daca este cazul
+next: face o legautra cu casuta(nodul), cel cu index mai amre sau daca e nodul e ultimul de pe linie, cu primul nod de pe aceeasi linie
+
+Pe langa aceasta un nod din had va mai avea cateva atribute: linie , index , damage(retine damageul curent), codul(daca este cazul).
+
+Functia move_toward: din pozitia actuala se muta o casuta spre o pozitie data.
+
+Functiile __NodHard, _NodHard sunt 2 constructori. 
+
+Functille get_address, convert, reconvert ma ajuta sa stochez adresa pe un singur nr (unsigned short int) folosind toti bitii acesetuia.
+Primii 4 biti vor retinte primul numar hexazecimal(0...F) urmatorii 4 biti urmatoul numar hexazecimal si tot asa.
+
+
+stiva.h:
+
+Functiile pentru stiva. De mentionat ca inserarea, stergerea nu se face la sfarsitul stivei ci la inceputul ei.
+
+
+
+coada.h:
+
+Functiile pentru coada. Insearera se face la inceput(prin head). Stergerea se face la sfarsitul listei(end).
+
+
+instructuon.h: se citesc datele problemei, functioa de baza get_instruction returneaza un pointer catre toate instructiunile citite
+(vor fi mai multe in cazurile bonus). Am scris mai multe detalii despre cum se realizeaza aceasta citire in program.
+
+
+
+decalaration.h: Aici am decalarat toate bibliotecile si structurile.
+Mentionez ca nus tiu daca asa se face cand lucrezi la un proiect mare in C. Vad ca metoda mea de a declara structurile si bilioteciile si eventual
+alte functii intr-un header functioneaza destul de bine. 
+
+Nu am reusit sa rezolv toate pierderile de memorie.
+
+
+
+

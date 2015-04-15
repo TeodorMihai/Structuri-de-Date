@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int map[100][100]; int was[100][100];
+
+
+int check(int xst, int yst, int xf, int yf, int n, int m) {
+	
+	int val = 0;
+
+	if(xst == xf && yst == yf) 
+	
+		return 1;
+
+	if(map[xst + 1][yst] != 0 && was[xst + 1][yst] == 0) {
+		was[xst + 1][yst] = 1;		 
+		val = check(xst + 1, yst, xf,yf, n, m);
+	}
+	if(map[xst - 1][yst] != 0 && was[xst - 1][yst] == 0) {
+		 was[xst -  1][yst] = 1;
+		 val = (val || check(xst - 1, yst, xf,yf, n, m));
+	}
+	if(map[xst][yst + 1] != 0 && was[xst][yst + 1] == 0) {
+		was[xst][yst + 1] = 1;
+		val = (val || check(xst, yst + 1, xf,yf, n, m) );
+	}
+	if(map[xst][yst - 1] != 0 && was[xst][yst - 1] == 0) {
+		 was[xst][yst - 1] = 1;
+		 val = (val || check(xst, yst - 1, xf,yf, n, m));
+	}
+	return val;
+}
+
+int main() {
+
+	int x_start; int y_start; int N; int M;	
+	
+	int x_finish; int y_finish;
+	
+	scanf("%d %d %d %d %d %d", &x_start, &y_start, &x_finish, &y_finish, &N, &M);
+	
+	for(int i = 1; i <= N; ++i)
+		for(int j = 1; j <= M; ++j)
+			scanf("%d", &map[i][j]);
+	if(check(x_start, y_start, x_finish, y_finish, N , M))
+			printf("DA\n");
+	else printf("NU\n");
+		
+
+	return 0;	
+}
