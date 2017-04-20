@@ -1,0 +1,9 @@
+.phony: build clean
+
+build: compare
+
+compare: compare.cc
+	gcc -std=c++0x compare.cc -O2 -lm -o compare -lstdc++
+
+clean:
+	rm -f compare

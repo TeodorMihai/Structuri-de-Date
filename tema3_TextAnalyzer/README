@@ -1,0 +1,27 @@
+
+Am o clasa Input cu fiserele.
+
+Ca sa citesc textul mai intai aflu cate caracetre sunt in fisier apoi le citesc pe toate deodata intr-un string.
+Pentru parsare. Consider space, new line si cratima ca separatori, si separ cuvintele cu ajutorul lor. Dupa ce separ,
+sterg caracterele din fiecare cuvant separat folosind strcpy. Retin 2 vectori cu cuvintele. Unul care contine fiecare cuvant o singura data
+si altul care contine fiecare cuvant in ordinea in care apare in text. Ca sa vad daca un cuvant a mai aparut sau nu in text(ca sa stiu daca il bag in vectorul cu cuvintele unice) folosesc un tree implementat cu pointeri. Vectorul de cuvinte unice o sa dea un id unic pentru fiecare cuvant cu ajutorul pot sa construiesc graful. Ca sa aflu id-ul (nodul cuvantului) o pot face cu ajutorul tree-ului, fiecare nod din tree avand un atribut index care retine indexului cuvantului respectiv, daca este cazul.
+
+Dupa aceasta asociez fiecarei perechi un cost (vectorul cost din functie getCost). Iau fiecare cuvant cu 2 for-uri (presupun ca se putea face si mai rapid,liniar dar vad ca merge decent si asa) si mai folosesc N vectori (containerul vector) ca sa nu calculez aceeasi muchie de 2 ori. (daca bag in graf aceeasi muchie de 2 ori nu e problema, programul functioneaza la fel de bine).
+
+Task1: Citesc 2 cate 2 cuvinte, aflu id-ul fiecarui cuvant cu ajutorul tree-ului. apoi gasesc muchia intre cele doua noduri si afisez costul.
+
+Task2: Fac dijkstra cu o coada de prioritate implementata cu un heap. Am folosit functiile de la heap scrise de mine pentru tema cu compresia. Aloc memorie pentru heap pe masura ce bag in el (atributul dimension imi zice cate elemente am alocat, size cate elemente am in vector). Folososesc functiile clasice pentru heap, sift si percolate care coboara si urca un nod in heap daca este nevoie.
+
+Pentru Dijkstra retin un vector dist care imi zice distanta pana la fiecare nod de al sursa (distanta pana la nodul sursa = 0, distanta pana la restul ndourilor = infinit) si un vector parent care imi zice urmatorul nod spre sursa a celui mai scurt drum de la nodul start la nodul indice al vectorului parent. In rest este Dijkstra clasic. Dupa ce parcurg nodul end ma oprec si afisez recursiv drumul cu fiecare cuvant folosind vectorul parent.
+
+Task3 (bonus): Fac o dinamica cu urmatoarea semnificatie: 
+
+D[i][j].cost - costul celui mai ieftin drum cu sfarsitul in nodul i, de lungime j - 1
+D[i][j].nod - ultimul nod al celui mai scrut drum, nu i, de lungime j - 1
+
+Aflu graful trasnpus pentru ca imi trebuie muchiile inverse unui nod. 
+Initializezi D[i][1] cu minimul vecinii nodului i 
+
+Apoi D[i][k] = min(D[vecinii_lui_i ][k - 1] +  cost_muchie_de_la_i_la_vecin_i[i][vecin_i]);
+
+Nu am implementat sa.mi gaseasca toate drumurile de cost minim cu lungime fixa. Am gasit doar 1 pentru fiecare cuvant si lungime.
