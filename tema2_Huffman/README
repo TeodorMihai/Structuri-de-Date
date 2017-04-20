@@ -1,0 +1,23 @@
+Compresor Huffman
+
+
+Compresia Huffman functioneaza eficient doar daca simbolurile nu au o freceventa de aparitie egal distribuita si daca 
+nu apar toate simbolurile din alfabet.(in unele cazuri, daca nu se respecta niciuna dintre aceste 2 conditii vor 
+rezulta fisere mai mari decat cele initiale)
+
+Se accepta ca fisiere de intrare pentru compresie de dimensiunea 2 000 000 bytes aprox =  2MB
+
+A o clasa Symbol in huffman.h / huffman.cpp unde cu caracterul si respectiv freceventa lui (>0 <1).
+Mai am o clasa nod(nod.h /nod.cpp) compusa dintr-un obiect Symbol si pointeri catre fii din stanga si dreapta.
+Pentru a putea insera mai usor in heap si a invata niste c++ am suprascris operatorii > si  <.
+Apoi creez un heap cu precedurile de rigoare (percolate / sift) in care inserez pointeri de noduri.  
+Heapul este la randul sau o clasa care contine vectorul de elemente(in cazul meu un vector de pointeri de noduri)
+si dimensiunea heapului.
+
+Initial creez un heap avand ca elemente fiecare caracater cu frecventa lui. (pointeri la noduri cu fiul din stanga si dreapta setati la null). Functi make HuffmanTree creaza arborele Huffman astfel: selectez cele mai mici 2 elemente din heap-ul actual(apoi le sterg),
+creez un nod nou care are ca fii cele 2 noduri selectate anterior in heap, dupa care bag acest nod in heap si repet procedura pana cand heapul contine un singur element.
+
+Dupa ce am creat arborele huffman ascoiez fiecarui nod un indice unic(functia traverese care este de fapt un DFS)
+Apoi creez un vector de structuri TagHuffmanNode cu specificatiile din tema si fac corespondenta intre indicii din arborele huffman initial si acestia (asa cum este cerut in tema).
+
+Cum nu pot scrie bit cu bit in fisiere binare am creat n vector de unsgined charuri unde scriu cu operatii pe biti valorile din corespunzatoare pentru fiecare carcter. (mai intai le aflu traversand tot arborele di retinand drumul pana la fiecare frunza cu o stiva statica)
